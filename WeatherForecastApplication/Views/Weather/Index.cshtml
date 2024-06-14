@@ -1,1 +1,33 @@
 ﻿@* This is a main view for displaying weather information *@
+
+@model IEnumerable<WeatherForecastApplication.Models.WeatherCondition>
+
+    @{
+    ViewData["Title"] = "Weather";
+    }
+
+    <h2>Weather Conditions</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>Date</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Wind Speed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var condition in Model)
+        {
+            <tr>
+                <td>@condition.Location.CityName</td>
+                <td>@condition.DateTime.ToString("g")</td>
+                <td>@condition.Temperature</td>
+                <td>@condition.Humidity</td>
+                <td>@condition.WindSpeed</td>
+            </tr>
+        }
+        </tbody>
+    </table>

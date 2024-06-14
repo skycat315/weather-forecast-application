@@ -1,0 +1,34 @@
+﻿@model WeatherForecastApplication.Models.WeatherCondition
+
+<h1>Create</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="LocationID" class="control-label"></label>
+        <input asp-for="LocationID" class="form-control" />
+        <span asp-validation-for="LocationID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateTime" class="control-label"></label>
+        <input asp-for="DateTime" class="form-control" />
+        <span asp-validation-for="DateTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Temperature" class="control-label"></label>
+        <input asp-for="Temperature" class="form-control" />
+        <span asp-validation-for="Temperature" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Humidity" class="control-label"></label>
+        <input asp-for="Humidity" class="form-control" />
+        <span asp-validation-for="Humidity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WindSpeed" class="control-label"></label>
+        <input asp-for="WindSpeed" class="form-control" />
+        <span asp-validation-for="WindSpeed" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
