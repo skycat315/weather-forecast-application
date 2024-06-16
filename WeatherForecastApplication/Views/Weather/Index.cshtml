@@ -2,32 +2,45 @@
 
 @model IEnumerable<WeatherForecastApplication.Models.WeatherCondition>
 
-    @{
+@{
     ViewData["Title"] = "Weather";
-    }
+}
 
-    <h2>Weather Conditions</h2>
+<h1>Weather Conditions</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>City</th>
-                <th>Date</th>
-                <th>Temperature</th>
-                <th>Humidity</th>
-                <th>Wind Speed</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var condition in Model)
+<p>
+    This page displays all weather conditions.
+</p>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date Time</th>
+            <th>Location</th>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Wind Speed</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@condition.Location.CityName</td>
-                <td>@condition.DateTime.ToString("g")</td>
-                <td>@condition.Temperature</td>
-                <td>@condition.Humidity</td>
-                <td>@condition.WindSpeed</td>
+                <td>@item.DateTime</td>
+                <td>@item.Temperature</td>
+                <td>@item.Humidity</td>
+                <td>@item.WindSpeed</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ConditionID">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ConditionID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ConditionID">Delete</a>
+                </td>
             </tr>
         }
-        </tbody>
-    </table>
+    </tbody>
+</table>

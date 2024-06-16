@@ -1,9 +1,14 @@
 // This is a model class representing the WeatherConditions table
 
+using WeatherForecastApplication.Models;
+using System.ComponentModel.DataAnnotations;
+
 namespace WeatherForecastApplication.Models
 {
     public class WeatherCondition
     {
+        // Primary key
+        [Key]
         public int ConditionID { get; set; }
         public int LocationID { get; set; }
         public DateTime DateTime { get; set; }
@@ -11,7 +16,7 @@ namespace WeatherForecastApplication.Models
         public float Humidity { get; set; }
         public float WindSpeed { get; set; }
 
-        // Navigation property
+        // Child reference (Navigation property to Location)
         public Location Location { get; set; }
     }
 

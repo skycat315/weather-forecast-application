@@ -1,19 +1,13 @@
-﻿@model IEnumerable<WeatherForecastApplication.Models.WeatherCondition>
+﻿@* This Razor view represents the Home Page of the Weather Forecast Application *@
 
-    <h1>Weather Conditions</h1>
+@{
+    ViewData["Title"] = "Home Page";
+}
 
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Weather Forecast Application</h1>
     <p>
-        <a asp-action="Create">Create New</a>
+        This application provides up-to-date weather forecasts by city name, including current conditions
+        and a 7-day forecast, helping you plan activities with reliable weather data.
     </p>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Location</th>
-                <th>Date Time</th>
-                <th>Temperature</th>
-                <th>Humidity</th>
-                <th>Wind Speed</th>
-            </tr>
-        </thead>
-    </table>
+</div>

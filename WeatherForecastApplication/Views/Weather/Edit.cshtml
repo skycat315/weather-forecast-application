@@ -1,0 +1,53 @@
+﻿@model WeatherForecastApplication.Models.WeatherCondition
+
+@{
+    ViewData["Title"] = "Edit Weather Condition";
+}
+
+<h1>Edit Weather Condition</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ConditionID" />
+
+    <div class="form-group">
+        <label asp-for="LocationID" class="control-label"></label>
+        <select asp-for="LocationID" class="form-control" asp-items="ViewBag.LocationID"></select>
+        <span asp-validation-for="LocationID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateTime" class="control-label"></label>
+        <input asp-for="DateTime" class="form-control" />
+        <span asp-validation-for="DateTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Temperature" class="control-label"></label>
+        <input asp-for="Temperature" class="form-control" />
+        <span asp-validation-for="Temperature" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Humidity" class="control-label"></label>
+        <input asp-for="Humidity" class="form-control" />
+        <span asp-validation-for="Humidity" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="WindSpeed" class="control-label"></label>
+        <input asp-for="WindSpeed" class="form-control" />
+        <span asp-validation-for="WindSpeed" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

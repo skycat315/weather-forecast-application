@@ -1,0 +1,28 @@
+﻿@model WeatherForecastApplication.Models.Location
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<h4>Location</h4>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.CityName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.CityName)
+    </dd>
+</dl>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

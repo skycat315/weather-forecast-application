@@ -1,20 +1,19 @@
 // This is a model class representing the UserPreferences table
 
+using WeatherForecastApplication.Models;
+using System.ComponentModel.DataAnnotations;
+
 namespace WeatherForecastApplication.Models
 {
     public class UserPreference
     {
-        public string UserID { get; set; }
+        // Primary key
+        [Key]
+        public int ConditionID { get; set; }
+
         public int LocationID { get; set; }
 
-        // Navigation property
+        // Child reference (Navigation property to Location)
         public Location Location { get; set; }
-
-        // Composite primary key configuration
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(UserID, LocationID);
-        }
     }
-
 }
