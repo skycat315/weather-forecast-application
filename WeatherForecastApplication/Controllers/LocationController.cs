@@ -1,5 +1,3 @@
-// This is a controller for managing locations (cities) where weather forecasts are available
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -11,10 +9,8 @@ namespace WeatherForecastApplication.Controllers
 {
     public class LocationController : Controller
     {
-        // Application database context
         private readonly ApplicationDbContext _context;
 
-        // Constructor to inject the database context
         public LocationController(ApplicationDbContext context)
         {
             _context = context;
@@ -23,10 +19,27 @@ namespace WeatherForecastApplication.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            // Retrieve all weather conditions from the database
             var locations = await _context.Locations.ToListAsync();
-            // Display layout details
             return View(locations);
+        }
+
+        // GET: Locations/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var location = await _context.Locations
+                .FirstOrDefaultAsync(m => m.LocationID == id);
+
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            return View(location);
         }
 
         // GET: Locations/Create
@@ -38,7 +51,7 @@ namespace WeatherForecastApplication.Controllers
         // POST: Locations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LocationID,CityName")] Location location)
+        public async Task<IActionResult> Create([Bind("LocationID,CityName,CountryName,Latitude,Longitude")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +81,7 @@ namespace WeatherForecastApplication.Controllers
         // POST: Locations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LocationID,CityName")] Location location)
+        public async Task<IActionResult> Edit(int id, [Bind("LocationID,CityName,CountryName,Latitude,Longitude")] Location location)
         {
             if (id != location.LocationID)
             {
@@ -130,25 +143,6 @@ namespace WeatherForecastApplication.Controllers
         private bool LocationExists(int id)
         {
             return _context.Locations.Any(e => e.LocationID == id);
-        }
-
-        // GET: Locations/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Locations
-                .FirstOrDefaultAsync(m => m.LocationID == id);
-
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
         }
     }
 }

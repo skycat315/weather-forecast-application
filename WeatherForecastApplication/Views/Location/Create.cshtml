@@ -1,21 +1,47 @@
-﻿@model WeatherForecastApplication.Models.Location
+﻿@model WeatherForecastApplication.Models.WeatherCondition
 
 @{
-    ViewData["Title"] = "Create Location";
+    ViewData["Title"] = "Create Weather Condition";
 }
 
-<h1>Create Location</h1>
+<h1>Create Weather Condition</h1>
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="CityName" class="control-label"></label>
-        <input asp-for="CityName" class="form-control" />
-        <span asp-validation-for="CityName" class="text-danger"></span>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LocationID" class="control-label"></label>
+                <input asp-for="LocationID" class="form-control" />
+                <span asp-validation-for="LocationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateTime" class="control-label"></label>
+                <input asp-for="DateTime" class="form-control" />
+                <span asp-validation-for="DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Temperature" class="control-label"></label>
+                <input asp-for="Temperature" class="form-control" />
+                <span asp-validation-for="Temperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Humidity" class="control-label"></label>
+                <input asp-for="Humidity" class="form-control" />
+                <span asp-validation-for="Humidity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WindSpeed" class="control-label"></label>
+                <input asp-for="WindSpeed" class="form-control" />
+                <span asp-validation-for="WindSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-    </div>
-</form>
+</div>
 
 <div>
     <a asp-action="Index">Back to List</a>

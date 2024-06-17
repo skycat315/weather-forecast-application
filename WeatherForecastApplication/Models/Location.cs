@@ -1,20 +1,14 @@
-// This is a model class representing the Locations table
-
-using WeatherForecastApplication.Models;
-using System.ComponentModel.DataAnnotations;
-
 namespace WeatherForecastApplication.Models
 {
     public class Location
     {
         // Primary key
-        [Key] 
         public int LocationID { get; set; }
 
-        [Required]
-        [Display(Name = "City Name")]
+        // Other properties
         public string CityName { get; set; }
-
+        public string CountryName { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
-
 }
