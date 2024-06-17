@@ -1,4 +1,6 @@
-﻿@model WeatherForecastApplication.Models.Location
+﻿@* This Razor view displays the details of a location in the Weather Forecast Application *@
+
+@model WeatherForecastApplication.Models.Location
 
 @{
     ViewData["Title"] = "Details";
@@ -6,41 +8,25 @@
 
 <h1>Details</h1>
 
+<h4>Location</h4>
+<hr />
+<dl class="row">
+    <!-- Display name of the city -->
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.CityName)
+    </dt>
+    <!-- Display value of the city -->
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.CityName)
+    </dd>
+</dl>
+
+<!-- Navigation link -->
 <div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CityName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CityName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CountryName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CountryName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Latitude)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Latitude)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Longitude)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Longitude)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.LocationID" class="btn btn-primary">Edit</a> |
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>
 
+<!-- Partial scripts for validation -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

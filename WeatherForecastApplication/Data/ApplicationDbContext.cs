@@ -16,7 +16,6 @@ namespace WeatherForecastApplication.Data
 
         public DbSet<Location> Locations { get; set; }
         public DbSet<WeatherCondition> WeatherConditions { get; set; }
-        public DbSet<UserPreference> UserPreferences { get; set; }
 
     }
 }

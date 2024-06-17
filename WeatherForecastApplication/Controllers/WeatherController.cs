@@ -43,7 +43,7 @@ namespace WeatherForecastApplication.Controllers
             // Check if the ID is null
             if (id == null)
             {
-                return NotFound(); // Return 404 if ID is null
+                return NotFound(); // Return 404
             }
 
             // Retrieve weather condition by ID with associated Location data
@@ -54,7 +54,7 @@ namespace WeatherForecastApplication.Controllers
             // Check if the weather condition exists
             if (weatherCondition == null)
             {
-                return NotFound(); // Return 404 if not found
+                return NotFound(); // Return 404
             }
 
             // Display weather condition details
@@ -79,29 +79,39 @@ namespace WeatherForecastApplication.Controllers
             // Check if the model state is valid
             if (ModelState.IsValid)
             {
-                _context.Add(weatherCondition);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.Add(weatherCondition); // Add the new weather condition to the context
+                await _context.SaveChangesAsync(); // Save changes to the database
+                return RedirectToAction(nameof(Index)); // Redirect to the index action or any other relevant action
             }
 
             // If ModelState is not valid, repopulate the Location dropdown
             ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
+
+            // If model state is not valid, re-render the form with validation errors
             return View(weatherCondition);
         }
 
         // GET: Weather/Edit/5
-        public async Task<IActionResult> Edit(int? id) {
-
-            var weatherCondition = _context.WeatherConditions.Find(id);
+        public async Task<IActionResult> Edit(int? id)
+        {
             // Check if the ID is null
+            if (id == null)
+            {
+                return NotFound(); // Return 404
+            }
+
+            // Retrieve a weather condition from the database using its ID asynchronously
+            var weatherCondition = await _context.WeatherConditions.FindAsync(id);
+            // Check if weatherCondition is null (not found in the database)
             if (weatherCondition == null)
             {
-                return NotFound(); // Return 404 if ID is null
+                return NotFound(); // Return 404
             }
 
             // Populate ViewData with the current location for dropdown
-            ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "Name", weatherCondition.LocationID);
-            // Display the form for editing the weather condition
+            ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
+
+            // Return the View with the located weather condition object
             return View(weatherCondition);
         }
 
@@ -110,10 +120,10 @@ namespace WeatherForecastApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ConditionID,LocationID,DateTime,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
         {
-            // Check if the ID matches the condition ID
+            // Check if the ID in the parameter does not match the ID in the weatherCondition object
             if (id != weatherCondition.ConditionID)
             {
-                return NotFound(); // Return 404 if IDs do not match
+                return NotFound(); // Return 404
             }
 
             // Check if the model state is valid
@@ -122,27 +132,30 @@ namespace WeatherForecastApplication.Controllers
                 try
                 {
                     _context.Update(weatherCondition); // Update the weather condition in the context
-                    await _context.SaveChangesAsync(); // Save changes asynchronously to the database
+                    await _context.SaveChangesAsync(); // Save changes to the database asynchronously
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    // Check if the weather condition still exists
+                    // Check if the weather condition ID already exists
                     if (!WeatherConditionExists(weatherCondition.ConditionID))
                     {
-                        return NotFound(); // Return 404 if not found
+                        return NotFound(); // Return 404
                     }
                     else
                     {
-                        throw; // Rethrow if another concurrency exception occurs
+                        throw;
                     }
                 }
-                return RedirectToAction(nameof(Index)); // Redirect to the Index action
+
+                // Redirect to the index action after successful update
+                return RedirectToAction(nameof(Index));
             }
 
-            // If the model state is not valid, redisplay the form with the provided data
-            ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "Name", weatherCondition.LocationID);
+            // If model state is not valid, re-render the form with validation errors
+            ViewBag.LocationID = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
             return View(weatherCondition);
         }
+
 
         // GET: Weather/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -150,7 +163,7 @@ namespace WeatherForecastApplication.Controllers
             // Check if the ID is null
             if (id == null)
             {
-                return NotFound(); // Return 404 if ID is null
+                return NotFound(); // Return 404
             }
 
             // Retrieve weather condition by ID with associated Location data
@@ -161,7 +174,7 @@ namespace WeatherForecastApplication.Controllers
             // Check if the weather condition exists
             if (weatherCondition == null)
             {
-                return NotFound(); // Return 404 if not found
+                return NotFound(); // Return 404
             }
 
             // Display the confirmation view for deleting the weather condition
@@ -190,6 +203,7 @@ namespace WeatherForecastApplication.Controllers
         // Check if a weather condition exists by ID
         private bool WeatherConditionExists(int id)
         {
+            // Check if any WeatherCondition entity has the specified ConditionID
             return _context.WeatherConditions.Any(e => e.ConditionID == id);
         }
     }

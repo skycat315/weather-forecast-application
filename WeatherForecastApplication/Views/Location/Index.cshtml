@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WeatherForecastApplication.Models.Location>
+﻿@* This Razor view displays a list of locations in the Weather Forecast Application *@
+
+@model IEnumerable<WeatherForecastApplication.Models.Location>
 
 @{
     ViewData["Title"] = "Locations";
@@ -10,25 +12,18 @@
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
-<table class="table sortable">
+<table class="table">
     <thead>
         <tr>
             <th>
-                <a href="#">@Html.DisplayNameFor(model => model.CityName)</a>
-            </th>
-            <th>
-                <a href="#">@Html.DisplayNameFor(model => model.CountryName)</a>
-            </th>
-            <th>
-                <a href="#">@Html.DisplayNameFor(model => model.Latitude)</a>
-            </th>
-            <th>
-                <a href="#">@Html.DisplayNameFor(model => model.Longitude)</a>
+                <!-- Display table header for CityName -->
+                @Html.DisplayNameFor(model => model.CityName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+        <!-- Iterates through each location in the model -->
         @foreach (var item in Model)
         {
             <tr>
@@ -36,15 +31,7 @@
                     @Html.DisplayFor(modelItem => item.CityName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CountryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Latitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Longitude)
-                </td>
-                <td>
+                    <!-- Link to each page -->
                     <a asp-action="Details" asp-route-id="@item.LocationID">Details</a> |
                     <a asp-action="Edit" asp-route-id="@item.LocationID">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@item.LocationID">Delete</a>

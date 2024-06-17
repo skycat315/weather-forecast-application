@@ -1,4 +1,6 @@
-﻿@model WeatherForecastApplication.Models.WeatherCondition
+﻿@* This Razor view displays the details of a weather condition and allows the user to delete it *@
+
+@model WeatherForecastApplication.Models.WeatherCondition
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,30 +13,40 @@
     <h4>Weather Condition</h4>
     <hr />
     <dl class="row">
+
+        <!-- CityName -->
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Location.CityName)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Location.CityName)
         </dd>
+
+        <!-- DateTime -->
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DateTime)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateTime)
         </dd>
+
+        <!-- Temperature -->
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Temperature)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Temperature)
         </dd>
+
+        <!-- Humidity -->
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Humidity)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Humidity)
         </dd>
+
+        <!-- WindSpeed -->
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WindSpeed)
         </dt>
@@ -46,6 +58,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ConditionID" />
         <div class="form-group">
+            <!-- Submit button -->
             <input type="submit" value="Delete" class="btn btn-danger" />
             <a asp-action="Index" class="btn btn-default">Cancel</a>
         </div>
