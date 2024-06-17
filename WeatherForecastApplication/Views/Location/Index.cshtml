@@ -14,11 +14,11 @@
 
 <table class="table">
     <thead>
+        <!-- Displays column header for each  -->
         <tr>
-            <th>
-                <!-- Display table header for CityName -->
-                @Html.DisplayNameFor(model => model.CityName)
-            </th>
+            <th>City</th>
+            <th>Province</th>
+            <th>Country</th>
             <th></th>
         </tr>
     </thead>
@@ -27,9 +27,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CityName)
-                </td>
+                <!-- Desplay table headers for Locaation data -->
+                <td>@item.CityName</td>
+                <td>@item.ProvinceName</td>
+                <td>@item.CountryName</td>
                 <td>
                     <!-- Link to each page -->
                     <a asp-action="Details" asp-route-id="@item.LocationID">Details</a> |

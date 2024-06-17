@@ -16,6 +16,17 @@ namespace WeatherForecastApplication.Models
         [Display(Name = "City Name")]
         public string CityName { get; set; }
 
+        // ProvinceName
+        //[Required(ErrorMessage = "Province Name is required")]
+        [Display(Name = "Province Name")]
+        public string ProvinceName { get; set; }
+
+        // Country Name
+        [Required(ErrorMessage = "Country Name is required")]
+        [Display(Name = "Cuntry Name")]
+        public string CountryName { get; set; }
+
+
     }
 
 }

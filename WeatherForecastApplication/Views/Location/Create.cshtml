@@ -10,11 +10,25 @@
 
 <form asp-action="Create">
 
-    <!-- Input for City Name -->
+    <!-- City Name -->
     <div class="form-group">
         <label asp-for="CityName" class="control-label"></label>
         <input asp-for="CityName" class="form-control" />
         <span asp-validation-for="CityName" class="text-danger"></span>
+    </div>
+
+    <!-- Province Name -->
+    <div class="form-group">
+        <label asp-for="ProvinceName" class="control-label"></label>
+        <input asp-for="ProvinceName" class="form-control" />
+        <span asp-validation-for="CityName" class="text-danger"></span>
+    </div>
+
+    <!-- Country Name -->
+    <div class="form-group">
+        <label asp-for="CountryName" class="control-label"></label>
+        <input asp-for="CountryName" class="form-control" />
+        <span asp-validation-for="CountryName" class="text-danger"></span>
     </div>
 
     <!-- Submit Button -->

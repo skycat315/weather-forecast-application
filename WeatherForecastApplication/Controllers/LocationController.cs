@@ -39,7 +39,7 @@ namespace WeatherForecastApplication.Controllers
         // POST: Locations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LocationID,CityName")] Location location)
+        public async Task<IActionResult> Create([Bind("LocationID,CityName,ProvinceName,CountryName")] Location location)
         {
             // Check if the model state is valid
             if (ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace WeatherForecastApplication.Controllers
         // POST: Locations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LocationID,CityName")] Location location)
+        public async Task<IActionResult> Edit(int id, [Bind("LocationID,CityName,ProvinceName,CountryName")] Location location)
         {
             // Check if the location with the specified ID exists
             if (id != location.LocationID)

@@ -13,13 +13,29 @@
     <h4>Location</h4>
     <hr />
     <dl class="row">
-        <!-- Display name of the city-->
+
+        <!-- CityName -->
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CityName)
         </dt>
-        <!-- Display value of the city -->
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CityName)
+        </dd>
+
+        <!-- ProvinceName -->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProvinceName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProvinceName)
+        </dd>
+
+        <!-- CountryName -->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CountryName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CountryName)
         </dd>
     </dl>
 
