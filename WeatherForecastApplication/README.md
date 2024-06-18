@@ -11,6 +11,13 @@ WeatherWise is a dynamic ASP.NET MVC website developed using ASP.NET and C# that
 ## Website
 Visit WeatherWise at [https://weatherwise.azurewebsites.net/](https://weatherwise.azurewebsites.net/).
 
-##External Resources
+## External Resources for Unique Layout (Bonus #1)
+
 - **Layout and Styling:**
-  - [BootstrapCDN](https://www.bootstrapcdn.com/): Content Delivery Network for Bootstrap CSS framework.
+  - [BootstrapCDN](https://www.bootstrapcdn.com/): Content Delivery Network for the Bootstrap CSS framework.
+
+- **Technology Icons:**
+  - [Devicon](https://devicon.dev/): Set of icons representing programming languages, frameworks, and tools.
+
+- **Images:**
+  - [Pexels](https://www.pexels.com/): Free stock photos and images.
