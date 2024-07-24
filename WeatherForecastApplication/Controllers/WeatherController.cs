@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeatherForecastApplication.Data;
 using WeatherForecastApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherForecastApplication.Controllers
 {
+
     public class WeatherController : Controller
     {
         // Application database context
@@ -38,6 +40,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: Weather/Details/5
+        // Anyone can access this action to view details
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             // Check if the ID is null
@@ -62,6 +66,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: Weather/Create
+        // Only logged-in users can add new data
+        [Authorize]
         public IActionResult Create()
         {
             // Populate ViewData with a list of locations for dropdown
@@ -71,6 +77,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // POST: Weather/Create
+        // Only logged-in users can add new data
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ConditionID,LocationID,DateTime,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
@@ -92,6 +100,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: Weather/Edit/5
+        // Only logged-in users can edit data
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             // Check if the ID is null
@@ -116,6 +126,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // POST: Weather/Edit/5
+        // Only logged-in users can edit data
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ConditionID,LocationID,DateTime,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
@@ -158,6 +170,8 @@ namespace WeatherForecastApplication.Controllers
 
 
         // GET: Weather/Delete/5
+        // Only logged-in users can delete data
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             // Check if the ID is null
@@ -182,6 +196,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // POST: Weather/Delete/5
+        // Only logged-in users can delete data
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

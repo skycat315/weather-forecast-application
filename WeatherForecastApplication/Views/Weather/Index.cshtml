@@ -8,13 +8,13 @@
 
 <h1>Weather Conditions</h1>
 
-<p>
-    This page displays all weather conditions.
-</p>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
+<!-- Show "Create New"" button only if the user is logged in -->
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
 
 <table class="table">
     <thead>
@@ -41,9 +41,16 @@
                 <td>@item.WindSpeed</td>
                 <td>
                     <!-- Link to each page -->
-                    <a asp-action="Details" asp-route-id="@item.ConditionID">Details</a> |
-                    <a asp-action="Edit" asp-route-id="@item.ConditionID">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ConditionID">Delete</a>
+                    <!-- Details -->
+                    <a asp-action="Details" asp-route-id="@item.ConditionID">Details</a>
+                    <!-- Show Edit and Delete links only if the user is logged in -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span> | </span>
+                        <a asp-action="Edit" asp-route-id="@item.ConditionID">Edit</a>
+                        <span> | </span>
+                        <a asp-action="Delete" asp-route-id="@item.ConditionID">Delete</a>
+                    }
                 </td>
             </tr>
         }

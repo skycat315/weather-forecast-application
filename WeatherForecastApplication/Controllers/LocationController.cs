@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WeatherForecastApplication.Data;
 using WeatherForecastApplication.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherForecastApplication.Controllers
 {
@@ -31,12 +32,16 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: Locations/Create
+        // Only logged-in users can add new data
+        [Authorize]
         public IActionResult Create()
         {
             return View(); // Return the default view for creating a new resource
         }
 
         // POST: Locations/Create
+        // Only logged-in users can add new data
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LocationID,CityName,ProvinceName,CountryName")] Location location)
@@ -54,6 +59,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: Locations/Edit/5
+        // Only logged-in users can edit data
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             // Check if the ID is null
@@ -75,6 +82,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // POST: Locations/Edit/5
+        // Only logged-in users can edit data
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LocationID,CityName,ProvinceName,CountryName")] Location location)
@@ -114,6 +123,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // GET: Locations/Delete/5
+        // Only logged-in users can delete data
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             // Check if the ID is null
@@ -137,6 +148,8 @@ namespace WeatherForecastApplication.Controllers
         }
 
         // POST: Locations/Delete/5
+        // Only logged-in users can delete data
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -155,6 +168,8 @@ namespace WeatherForecastApplication.Controllers
             return _context.Locations.Any(e => e.LocationID == id);
         }
 
+        // Anyone can access this action to view details
+        [AllowAnonymous]
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
