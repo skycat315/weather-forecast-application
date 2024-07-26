@@ -53,13 +53,19 @@ app.UseRouting();
 app.UseAuthentication(); // Enable authentication
 app.UseAuthorization();
 
-// Redirect unauthenticated users to the Google login page when accessing protected resources
+// Allow access to the home page and redirect unauthenticated users from protected resources to the Google login page
 app.Use(async (context, next) =>
 {
-    // Check if the request is for a protected resource and if the user is not authenticated
+    // Allow access to the home page
+    if (context.Request.Path.StartsWithSegments("/"))
+    {
+        await next();
+        return;
+    }
+
+    // Redirect unauthenticated users from protected resources to the Google login page
     if (context.Request.Path.StartsWithSegments("/Protected") && !context.User.Identity.IsAuthenticated)
     {
-        // Redirect to the Google login page
         context.Response.Redirect("/Account/GoogleLogin");
         return;
     }
