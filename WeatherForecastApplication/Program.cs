@@ -19,7 +19,12 @@ builder.Services.AddControllersWithViews();
 // Set up Google authentication using values from appsettings.json
 var configuration = builder.Configuration;
 
-builder.Services.AddAuthentication()
+builder.Services.AddAuthentication(options =>
+{
+    // Set default authentication and sign-in schemes
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+})
     .AddGoogle(options =>
     {
         options.ClientId = configuration["Authentication:Google:ClientId"];
@@ -45,7 +50,22 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Enable authentication
 app.UseAuthorization();
+
+// Redirect unauthenticated users to the Google login page when accessing protected resources
+app.Use(async (context, next) =>
+{
+    // Check if the request is for a protected resource and if the user is not authenticated
+    if (context.Request.Path.StartsWithSegments("/Protected") && !context.User.Identity.IsAuthenticated)
+    {
+        // Redirect to the Google login page
+        context.Response.Redirect("/Account/GoogleLogin");
+        return;
+    }
+
+    await next();
+});
 
 app.MapControllerRoute(
     name: "default",
