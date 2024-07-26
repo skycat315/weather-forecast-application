@@ -9,7 +9,7 @@ WeatherWise is a dynamic ASP.NET MVC website developed using ASP.NET and C# that
 - Amit Singh (200564273)
 
 ## Website
-Visit WeatherWise at [https://weatherwise.azurewebsites.net/](https://weatherwise.azurewebsites.net/).
+Visit WeatherWise at <a href="https://weatherwise.azurewebsites.net/" target="_blank">https://weatherwise.azurewebsites.net/</a>.
 
 ## External Resources
 - **Layout and Styling:**
