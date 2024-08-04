@@ -32,7 +32,7 @@ namespace WeatherForecastApplication.Controllers
             // Retrieve all weather conditions from the database
             var weatherConditions = await _context.WeatherConditions
                 .Include(w => w.Location) // Include related Location data
-                .OrderBy(w => w.DateTime) // Order by DateTime ascending
+                .OrderBy(w => w.Date.Date) // Get only the date part and order by ascending
                 .ToListAsync(); // Convert results to a list asynchronously
 
             // Display weather condition details
@@ -81,7 +81,7 @@ namespace WeatherForecastApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConditionID,LocationID,DateTime,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
+        public async Task<IActionResult> Create([Bind("ConditionID,LocationID,Date,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
         {
 
             // Check if the model state is valid
@@ -130,7 +130,7 @@ namespace WeatherForecastApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConditionID,LocationID,DateTime,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
+        public async Task<IActionResult> Edit(int id, [Bind("ConditionID,LocationID,Date,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
         {
             // Check if the ID in the parameter does not match the ID in the weatherCondition object
             if (id != weatherCondition.ConditionID)

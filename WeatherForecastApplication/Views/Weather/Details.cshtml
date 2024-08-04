@@ -21,12 +21,12 @@
             @Html.DisplayFor(model => model.Location.CityName)
         </dd>
 
-        <!-- DateTime -->
+        <!-- Date -->
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Date)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateTime)
+            @Model.Date.ToString("yyyy-MM-dd") <!-- Display only the date part -->
         </dd>
 
         <!-- Temperature-->

@@ -16,9 +16,9 @@ namespace WeatherForecastApplication.Models
         [Required(ErrorMessage = "Location is required")]
         public int LocationID { get; set; }
 
-        // DateTime
+        // Date
         [Required(ErrorMessage = "Date and time is required")]
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
 
         // Tempratur
 

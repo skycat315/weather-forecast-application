@@ -20,7 +20,7 @@
     <thead>
         <!-- Displays column header for each  -->
         <tr>
-            <th>Date Time</th>
+            <th>Date</th>
             <th>Location</th>
             <th>Temperature</th>
             <th>Humidity</th>
@@ -34,7 +34,7 @@
         {
             <tr>
                 <!-- Desplay table headers for Weather Condition data -->
-                <td>@item.DateTime</td>
+                <td>@item.Date.ToString("yyyy-MM-dd")</td> <!-- Display only the date part -->
                 <td>@item.Location?.CityName</td>
                 <td>@item.Temperature</td>
                 <td>@item.Humidity</td>
