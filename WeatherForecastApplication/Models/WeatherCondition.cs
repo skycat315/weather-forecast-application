@@ -5,6 +5,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WeatherForecastApplication.Models
 {
+    // Types of weather conditions
+    public enum WeatherConditionType
+    {
+        Sunny = 0,
+        Cloudy = 1,
+        Rainy = 2
+    }
+
     public class WeatherCondition
     {
         // ConditionID (Primary key)
@@ -20,7 +28,11 @@ namespace WeatherForecastApplication.Models
         [Required(ErrorMessage = "Date and time is required")]
         public DateTime Date { get; set; }
 
-        // Tempratur
+        // Condition
+        [Required(ErrorMessage = "Condition is required")]
+        public WeatherConditionType Condition { get; set; }
+
+        // Temprature
 
         [Required(ErrorMessage = "Temperature is required")]
         public float Temperature { get; set; }

@@ -24,6 +24,13 @@
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
+    <!-- Condition -->
+    <div class="form-group">
+        <label asp-for="Condition" class="control-label"></label>
+        <select asp-for="Condition" class="form-control" asp-items="Html.GetEnumSelectList<WeatherForecastApplication.Models.WeatherConditionType>()"></select>
+        <span asp-validation-for="Condition" class="text-danger"></span>
+    </div>
+
     <!-- Temperature -->
     <div class="form-group">
         <label asp-for="Temperature" class="control-label"></label>

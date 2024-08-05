@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherForecastApplication.Controllers
 {
-
     public class WeatherController : Controller
     {
         // Application database context
@@ -72,6 +71,8 @@ namespace WeatherForecastApplication.Controllers
         {
             // Populate ViewData with a list of locations for dropdown
             ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "CityName");
+            // Populate ViewData with weather condition options
+            ViewData["Condition"] = new SelectList(Enum.GetValues(typeof(WeatherConditionType)));
             // Display the form for creating a new weather condition
             return View();
         }
@@ -81,9 +82,8 @@ namespace WeatherForecastApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConditionID,LocationID,Date,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
+        public async Task<IActionResult> Create([Bind("ConditionID,LocationID,Date,Condition,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
         {
-
             // Check if the model state is valid
             if (ModelState.IsValid)
             {
@@ -92,8 +92,9 @@ namespace WeatherForecastApplication.Controllers
                 return RedirectToAction(nameof(Index)); // Redirect to the index action or any other relevant action
             }
 
-            // If ModelState is not valid, repopulate the Location dropdown
+            // If ModelState is not valid, repopulate the dropdowns
             ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
+            ViewData["Condition"] = new SelectList(Enum.GetValues(typeof(WeatherConditionType)), weatherCondition.Condition);
 
             // If model state is not valid, re-render the form with validation errors
             return View(weatherCondition);
@@ -120,6 +121,7 @@ namespace WeatherForecastApplication.Controllers
 
             // Populate ViewData with the current location for dropdown
             ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
+            ViewData["Condition"] = new SelectList(Enum.GetValues(typeof(WeatherConditionType)), weatherCondition.Condition);
 
             // Return the View with the located weather condition object
             return View(weatherCondition);
@@ -130,7 +132,7 @@ namespace WeatherForecastApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConditionID,LocationID,Date,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
+        public async Task<IActionResult> Edit(int id, [Bind("ConditionID,LocationID,Date,Condition,Temperature,Humidity,WindSpeed")] WeatherCondition weatherCondition)
         {
             // Check if the ID in the parameter does not match the ID in the weatherCondition object
             if (id != weatherCondition.ConditionID)
@@ -164,10 +166,11 @@ namespace WeatherForecastApplication.Controllers
             }
 
             // If model state is not valid, re-render the form with validation errors
-            ViewBag.LocationID = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
+            ViewData["LocationID"] = new SelectList(_context.Locations, "LocationID", "CityName", weatherCondition.LocationID);
+            ViewData["Condition"] = new SelectList(Enum.GetValues(typeof(WeatherConditionType)), weatherCondition.Condition);
+
             return View(weatherCondition);
         }
-
 
         // GET: Weather/Delete/5
         // Only logged-in users can delete data
