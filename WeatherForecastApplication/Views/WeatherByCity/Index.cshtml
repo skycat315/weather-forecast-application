@@ -1,0 +1,70 @@
+﻿@* This is a main view for displaying weather information for a selected city, allowing users to choose a city from a dropdown list and view the corresponding weather conditions *@
+
+@{
+    ViewData["Title"] = "Weather By City";
+
+    // Retrieve and cast data from ViewData
+    var locations = ViewData["Locations"] as List<WeatherForecastApplication.Models.Location>;
+    var weatherConditions = ViewData["WeatherConditions"] as IEnumerable<WeatherForecastApplication.Models.WeatherCondition>;
+    var selectedLocation = ViewData["SelectedLocation"] as int?;
+    var selectedCityName = ViewData["SelectedCityName"] as string;
+}
+
+<h1>Weather By City</h1>
+
+<!-- Form for selecting a city to view weather conditions -->
+<form method="post">
+    <div class="form-group">
+        <label for="locationId">Select City</label>
+        <select id="locationId" name="locationId" class="form-control">
+            <option value="">-- Select City --</option>
+            // Check if the locations list is not null
+            @if (locations != null)
+            {
+                // Loop through each location in the locations list
+                foreach (var location in locations)
+                {
+                    // Create an option element for each location with the location ID as the value and the city name as the display text
+                    <option value="@location.LocationID">
+                        @location.CityName
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Display weather conditions if available -->
+@if (weatherConditions != null && weatherConditions.Any())
+{
+    <h2>Weather in @(selectedCityName ?? "City Name")</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Weather</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Wind Speed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var weather in weatherConditions)
+            {
+                <tr>
+                    <td>@weather.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@weather.Condition.ToString()</td>
+                    <td>@weather.Temperature</td>
+                    <td>@weather.Humidity</td>
+                    <td>@weather.WindSpeed</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+// Display a message if no weather data is available
+else if (selectedLocation.HasValue)
+{
+    <p>No weather data found for the selected city.</p>
+}

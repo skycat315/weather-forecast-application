@@ -39,6 +39,10 @@ p.lead {
     color: #fff;
 }
 
+.navbar-nav .nav-item {
+    margin-right: 20px;
+}
+
 ul {
     list-style-type: disc;
     margin-left: 20px;
