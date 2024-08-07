@@ -1,5 +1,5 @@
 /* General */
-
+d
 html {
     font-size: 14px;
 }
@@ -11,7 +11,17 @@ html {
 }
 
 .btn, .btn:active, .btn-link.nav-link, .form-control, .form-check-input {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.15rem #258cfb;
+    margin: 10px 3px;
+}
+
+.nav-link {
+    margin: 10px;
+}
+
+.nav-register, .nav-login {
+    border: solid 0.15rem white;
+    border-radius: 15%;
 }
 
 html {
@@ -37,6 +47,10 @@ body {
 p.lead {
     font-size: 1.2rem;
     color: #fff;
+}
+
+p {
+    margin-top: 10px;
 }
 
 .navbar-nav .nav-item {
