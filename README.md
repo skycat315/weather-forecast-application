@@ -14,3 +14,6 @@ Visit WeatherWise at <a href="https://weatherwise.azurewebsites.net/" target="_b
 ## External Resources
 - **Layout and Styling:**
   - [BootstrapCDN](https://www.bootstrapcdn.com/): Content Delivery Network for Bootstrap CSS framework.
+- **Icons and Favicon:**
+  - [Flaticon - Weather Icon](https://www.flaticon.com/free-icon/weather_6451205?term=weather&page=1&position=96&origin=search&related_id=6451205): Free weather icon used in the project.
+  - [Favicon.io](https://favicon.io/): Tool for generating favicons for web applications.
