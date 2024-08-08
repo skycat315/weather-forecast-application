@@ -25,8 +25,11 @@ namespace WeatherForecastApplication.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            // Retrieve all weather conditions from the database
-            var locations = await _context.Locations.ToListAsync();
+            // Retrieve all locations from the database
+            var locations = await _context.Locations
+                .OrderBy(l => l.CityName) // Order by CityName in ascending alphabetical order
+                .ToListAsync(); // Convert results to a list asynchronously
+
             // Display layout details
             return View(locations);
         }

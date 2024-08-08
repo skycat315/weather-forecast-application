@@ -23,7 +23,7 @@ namespace WeatherForecastApplication.Models
 
         // Country Name
         [Required(ErrorMessage = "Country Name is required")]
-        [Display(Name = "Cuntry Name")]
+        [Display(Name = "Country Name")]
         public string CountryName { get; set; }
 
 

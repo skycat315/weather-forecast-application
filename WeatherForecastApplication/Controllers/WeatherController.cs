@@ -32,6 +32,7 @@ namespace WeatherForecastApplication.Controllers
             var weatherConditions = await _context.WeatherConditions
                 .Include(w => w.Location) // Include related Location data
                 .OrderBy(w => w.Date.Date) // Get only the date part and order by ascending
+                .ThenBy(w => w.Location.CityName) // Order by Location name in ascending alphabetical order
                 .ToListAsync(); // Convert results to a list asynchronously
 
             // Display weather condition details
